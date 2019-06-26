@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'br.com.trustsystems'
+version '0.1.0-ALPHA.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    jsonPathVersion = "2.4.0"
+    junitVersion = "4.12"
+}
+
+dependencies {
+    implementation "com.jayway.jsonpath:json-path:${jsonPathVersion}"
+    testImplementation "junit:junit:${junitVersion}"
+}
+
+wrapper {
+    gradleVersion = "4.10.3"
+}
