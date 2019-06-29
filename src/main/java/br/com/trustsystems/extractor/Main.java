@@ -4,6 +4,9 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 import net.minidev.json.JSONArray;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
         String[] keysToExtract = new String[]{"UserId", "Name", "ContactEmail", "ContactName", "ContactPhone"};
@@ -11,9 +14,15 @@ public class Main {
 
         ReadContext context = JsonPath.parse(json);
 
+        Map<String, String> userData = new LinkedHashMap<>();
+
         for (String key : keysToExtract) {
             JSONArray read = context.read("$.content[*]." + key.toLowerCase() + ".#text");
-            System.out.println(read.get(0));
+            userData.put(key, (String) read.get(0));
+        }
+
+        for (String key : userData.keySet()) {
+            System.out.println(userData.get(key));
         }
     }
 }
